@@ -1,0 +1,919 @@
+<!DOCTYPE html>
+<html lang="sq">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Summer Camping Albania</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --green-dark: #1a5c35;
+    --green-mid: #2d7a4f;
+    --green-bright: #3d9e68;
+    --green-light: #e8f5ee;
+    --cream: #faf9f6;
+    --dark: #0f2419;
+    --gold: #f0c040;
+    --white: #ffffff;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Nunito', sans-serif;
+    background: var(--cream);
+    color: var(--dark);
+    overflow-x: hidden;
+  }
+
+  /* NAV */
+  nav {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 100;
+    background: rgba(15,36,25,0.92);
+    backdrop-filter: blur(10px);
+    padding: 14px 40px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: 2px solid var(--green-bright);
+  }
+
+  .nav-logo {
+    font-family: 'Bebas Neue', cursive;
+    font-size: 1.8rem;
+    color: var(--white);
+    letter-spacing: 3px;
+  }
+
+  .nav-logo span { color: var(--gold); }
+
+  nav ul {
+    list-style: none;
+    display: flex;
+    gap: 30px;
+  }
+
+  nav ul a {
+    color: rgba(255,255,255,0.85);
+    text-decoration: none;
+    font-weight: 700;
+    font-size: 0.85rem;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    transition: color 0.2s;
+  }
+
+  nav ul a:hover { color: var(--gold); }
+
+  /* HERO */
+  .hero {
+    min-height: 100vh;
+    background: linear-gradient(to bottom, rgba(0,0,0,0.65) 0%, rgba(15,36,25,0.5) 100%),
+      url('https://images.unsplash.com/photo-1504280390367-361c6d9f38f4?w=1600') center/cover no-repeat;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 80px 20px 40px;
+    position: relative;
+  }
+
+  .hero::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 80px;
+    background: linear-gradient(to bottom, transparent, var(--cream));
+  }
+
+  .hero-badge {
+    background: var(--green-bright);
+    color: white;
+    font-weight: 800;
+    font-size: 0.8rem;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    padding: 8px 22px;
+    border-radius: 30px;
+    margin-bottom: 24px;
+    display: inline-block;
+    animation: fadeDown 0.8s ease both;
+  }
+
+  .hero h1 {
+    font-family: 'Bebas Neue', cursive;
+    font-size: clamp(5rem, 15vw, 11rem);
+    color: var(--white);
+    line-height: 0.9;
+    letter-spacing: 6px;
+    text-shadow: 0 4px 30px rgba(0,0,0,0.5);
+    animation: fadeUp 0.9s ease 0.2s both;
+  }
+
+  .hero h1 span {
+    display: block;
+    color: var(--gold);
+  }
+
+  .hero-sub {
+    margin-top: 24px;
+    font-size: 1.15rem;
+    color: rgba(255,255,255,0.9);
+    font-weight: 600;
+    animation: fadeUp 0.9s ease 0.4s both;
+    max-width: 500px;
+    background: rgba(45,122,79,0.5);
+    padding: 12px 28px;
+    border-radius: 8px;
+    border: 1px solid rgba(255,255,255,0.2);
+  }
+
+  .hero-btns {
+    margin-top: 40px;
+    display: flex;
+    gap: 16px;
+    flex-wrap: wrap;
+    justify-content: center;
+    animation: fadeUp 0.9s ease 0.6s both;
+  }
+
+  .btn {
+    padding: 14px 36px;
+    border-radius: 50px;
+    font-weight: 800;
+    font-size: 0.95rem;
+    letter-spacing: 1px;
+    text-decoration: none;
+    cursor: pointer;
+    border: none;
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
+
+  .btn:hover { transform: translateY(-3px); box-shadow: 0 8px 25px rgba(0,0,0,0.3); }
+
+  .btn-primary { background: var(--gold); color: var(--dark); }
+  .btn-outline { background: transparent; color: white; border: 2px solid white; }
+
+  /* STATS BAR */
+  .stats-bar {
+    background: var(--green-dark);
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    text-align: center;
+    padding: 28px 40px;
+    gap: 20px;
+  }
+
+  .stat-item .num {
+    font-family: 'Bebas Neue', cursive;
+    font-size: 2.5rem;
+    color: var(--gold);
+    letter-spacing: 2px;
+  }
+
+  .stat-item .lbl {
+    font-size: 0.78rem;
+    color: rgba(255,255,255,0.75);
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+  }
+
+  /* SECTION BASE */
+  section { padding: 90px 40px; }
+
+  .section-tag {
+    display: inline-block;
+    background: var(--green-light);
+    color: var(--green-dark);
+    font-weight: 800;
+    font-size: 0.75rem;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    padding: 6px 18px;
+    border-radius: 20px;
+    margin-bottom: 14px;
+    border: 1.5px solid var(--green-bright);
+  }
+
+  .section-title {
+    font-family: 'Bebas Neue', cursive;
+    font-size: clamp(2.5rem, 6vw, 4.5rem);
+    color: var(--green-dark);
+    line-height: 1;
+    letter-spacing: 2px;
+    margin-bottom: 16px;
+  }
+
+  .section-body {
+    font-size: 1rem;
+    color: #444;
+    line-height: 1.75;
+    max-width: 640px;
+  }
+
+  /* ABOUT */
+  .about {
+    background: var(--cream);
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 60px;
+    align-items: center;
+  }
+
+  .about-img {
+    border-radius: 20px;
+    overflow: hidden;
+    height: 420px;
+    position: relative;
+    box-shadow: 0 20px 60px rgba(26,92,53,0.25);
+  }
+
+  .about-img img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .about-img::before {
+    content: '⛺';
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    font-size: 2.5rem;
+    z-index: 2;
+    background: var(--gold);
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    line-height: 60px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+  }
+
+  /* SESSIONS */
+  .sessions-section {
+    background: var(--dark);
+    color: white;
+    text-align: center;
+  }
+
+  .sessions-section .section-title { color: white; }
+  .sessions-section .section-body { color: rgba(255,255,255,0.7); margin: 0 auto 50px; }
+
+  .sessions-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+    max-width: 900px;
+    margin: 0 auto;
+  }
+
+  .session-card {
+    background: rgba(255,255,255,0.06);
+    border: 1.5px solid rgba(255,255,255,0.12);
+    border-radius: 16px;
+    padding: 36px 24px;
+    transition: transform 0.2s, border-color 0.2s;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .session-card:hover {
+    transform: translateY(-6px);
+    border-color: var(--gold);
+  }
+
+  .session-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 4px;
+    background: var(--gold);
+  }
+
+  .session-num {
+    font-family: 'Bebas Neue', cursive;
+    font-size: 4rem;
+    color: rgba(255,255,255,0.08);
+    position: absolute;
+    top: 10px;
+    right: 16px;
+    line-height: 1;
+  }
+
+  .session-label {
+    font-size: 0.7rem;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--gold);
+    font-weight: 800;
+    margin-bottom: 10px;
+  }
+
+  .session-dates {
+    font-family: 'Bebas Neue', cursive;
+    font-size: 1.6rem;
+    color: white;
+    letter-spacing: 1px;
+    margin-bottom: 8px;
+  }
+
+  .session-price {
+    font-size: 1rem;
+    color: rgba(255,255,255,0.6);
+    font-weight: 600;
+  }
+
+  .session-price strong {
+    font-family: 'Bebas Neue', cursive;
+    font-size: 1.8rem;
+    color: var(--gold);
+    letter-spacing: 1px;
+  }
+
+  /* ACTIVITIES */
+  .activities {
+    background: var(--green-light);
+  }
+
+  .activities-header {
+    text-align: center;
+    margin-bottom: 50px;
+  }
+
+  .act-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+    max-width: 1000px;
+    margin: 0 auto;
+  }
+
+  .act-card {
+    background: white;
+    border-radius: 16px;
+    padding: 30px 24px;
+    text-align: center;
+    box-shadow: 0 4px 20px rgba(26,92,53,0.1);
+    transition: transform 0.2s, box-shadow 0.2s;
+    border: 2px solid transparent;
+  }
+
+  .act-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 12px 35px rgba(26,92,53,0.18);
+    border-color: var(--green-bright);
+  }
+
+  .act-icon {
+    font-size: 2.5rem;
+    margin-bottom: 14px;
+    display: block;
+  }
+
+  .act-card h3 {
+    font-family: 'Bebas Neue', cursive;
+    font-size: 1.3rem;
+    color: var(--green-dark);
+    letter-spacing: 1px;
+    margin-bottom: 8px;
+  }
+
+  .act-card p {
+    font-size: 0.85rem;
+    color: #666;
+    line-height: 1.6;
+  }
+
+  /* LOCATION */
+  .location-section {
+    background: white;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 60px;
+    align-items: center;
+  }
+
+  .location-img {
+    border-radius: 20px;
+    overflow: hidden;
+    height: 400px;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.15);
+  }
+
+  .location-img img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .price-tag {
+    display: inline-flex;
+    align-items: baseline;
+    gap: 6px;
+    background: var(--green-dark);
+    color: white;
+    padding: 14px 26px;
+    border-radius: 12px;
+    margin: 20px 0;
+  }
+
+  .price-tag .amount {
+    font-family: 'Bebas Neue', cursive;
+    font-size: 3rem;
+    color: var(--gold);
+    letter-spacing: 2px;
+  }
+
+  .price-tag .per {
+    font-size: 0.85rem;
+    opacity: 0.75;
+    font-weight: 600;
+  }
+
+  .location-features {
+    list-style: none;
+    margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .location-features li {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-weight: 600;
+    font-size: 0.95rem;
+    color: var(--dark);
+  }
+
+  .location-features li span {
+    color: var(--green-bright);
+    font-size: 1.1rem;
+  }
+
+  /* ETHICS */
+  .ethics-section {
+    background: var(--green-dark);
+    color: white;
+    text-align: center;
+  }
+
+  .ethics-section .section-title { color: white; }
+
+  .ethics-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+    max-width: 900px;
+    margin: 40px auto 0;
+  }
+
+  .ethics-item {
+    padding: 24px 20px;
+    border-radius: 12px;
+    background: rgba(255,255,255,0.08);
+    border: 1px solid rgba(255,255,255,0.15);
+  }
+
+  .ethics-num {
+    font-family: 'Bebas Neue', cursive;
+    font-size: 2.5rem;
+    color: var(--gold);
+    line-height: 1;
+    margin-bottom: 8px;
+  }
+
+  .ethics-item p {
+    font-size: 0.85rem;
+    color: rgba(255,255,255,0.8);
+    font-weight: 600;
+    letter-spacing: 0.5px;
+  }
+
+  /* STAFF */
+  .staff-section {
+    background: var(--cream);
+    text-align: center;
+  }
+
+  .staff-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+    max-width: 900px;
+    margin: 40px auto 0;
+  }
+
+  .staff-card {
+    background: white;
+    border-radius: 14px;
+    padding: 24px 16px;
+    box-shadow: 0 4px 18px rgba(0,0,0,0.08);
+    border-top: 4px solid var(--green-bright);
+  }
+
+  .staff-emoji {
+    font-size: 2.5rem;
+    margin-bottom: 12px;
+    display: block;
+  }
+
+  .staff-role {
+    font-family: 'Bebas Neue', cursive;
+    font-size: 1.1rem;
+    color: var(--green-dark);
+    letter-spacing: 1px;
+    margin-bottom: 4px;
+  }
+
+  .staff-count {
+    font-size: 0.78rem;
+    color: #888;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 6px;
+  }
+
+  .staff-wage {
+    font-size: 0.82rem;
+    color: var(--green-dark);
+    font-weight: 800;
+    background: var(--green-light);
+    padding: 4px 10px;
+    border-radius: 20px;
+    display: inline-block;
+  }
+
+  /* CONTACT */
+  .contact-section {
+    background: linear-gradient(135deg, var(--dark), var(--green-dark));
+    color: white;
+    text-align: center;
+  }
+
+  .contact-section .section-title { color: white; }
+
+  .contact-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+    max-width: 700px;
+    margin: 40px auto 0;
+  }
+
+  .contact-item {
+    padding: 28px 20px;
+    border-radius: 14px;
+    background: rgba(255,255,255,0.08);
+    border: 1px solid rgba(255,255,255,0.15);
+  }
+
+  .contact-icon {
+    font-size: 2rem;
+    margin-bottom: 10px;
+    display: block;
+  }
+
+  .contact-label {
+    font-size: 0.72rem;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--gold);
+    font-weight: 800;
+    margin-bottom: 6px;
+  }
+
+  .contact-value {
+    font-size: 0.9rem;
+    color: rgba(255,255,255,0.85);
+    font-weight: 600;
+  }
+
+  /* FOOTER */
+  footer {
+    background: var(--dark);
+    text-align: center;
+    padding: 24px;
+    font-size: 0.82rem;
+    color: rgba(255,255,255,0.4);
+    font-weight: 600;
+    letter-spacing: 0.5px;
+  }
+
+  footer span { color: var(--green-bright); }
+
+  /* ANIMATIONS */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(24px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  @keyframes fadeDown {
+    from { opacity: 0; transform: translateY(-14px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .reveal {
+    opacity: 0;
+    transform: translateY(28px);
+    transition: opacity 0.7s ease, transform 0.7s ease;
+  }
+
+  .reveal.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  @media (max-width: 768px) {
+    nav ul { display: none; }
+    .stats-bar { grid-template-columns: repeat(2,1fr); }
+    .about, .location-section { grid-template-columns: 1fr; }
+    .sessions-grid, .act-grid, .ethics-grid, .staff-grid, .contact-grid {
+      grid-template-columns: repeat(2,1fr);
+    }
+    section { padding: 60px 20px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">Summer<span>Camp</span></div>
+  <ul>
+    <li><a href="#about">Rreth Nesh</a></li>
+    <li><a href="#sessions">Sesiont</a></li>
+    <li><a href="#activities">Aktivitetet</a></li>
+    <li><a href="#location">Vendodhja</a></li>
+    <li><a href="#contact">Kontakti</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-badge">⛺ Projekti Shkollor 2024</div>
+  <h1>SUMMER<span>CAMPING</span></h1>
+  <p class="hero-sub">Koha erdhi! Ejani dhe argëtoni fëmijët/adoleshentët tuaj me ne!</p>
+  <div class="hero-btns">
+    <a href="#sessions" class="btn btn-primary">Regjistrohu Tani</a>
+    <a href="#about" class="btn btn-outline">Mëso Më Shumë</a>
+  </div>
+</div>
+
+<!-- STATS BAR -->
+<div class="stats-bar">
+  <div class="stat-item">
+    <div class="num">50</div>
+    <div class="lbl">Kapacitet persona</div>
+  </div>
+  <div class="stat-item">
+    <div class="num">3</div>
+    <div class="lbl">Sesione verore</div>
+  </div>
+  <div class="stat-item">
+    <div class="num">7</div>
+    <div class="lbl">Ditë çdo sesion</div>
+  </div>
+  <div class="stat-item">
+    <div class="num">17K</div>
+    <div class="lbl">Lekë / sesion</div>
+  </div>
+</div>
+
+<!-- ABOUT -->
+<section class="about" id="about">
+  <div class="about-img reveal">
+    <img src="https://images.unsplash.com/photo-1504851149312-7a075b496cc7?w=800" alt="Kampi veror" />
+  </div>
+  <div class="reveal">
+    <div class="section-tag">Misioni Ynë</div>
+    <h2 class="section-title">MISIONI I SHOQËRISË</h2>
+    <p class="section-body">Ne kemi si mision të ofrojmë një përvojë të paharrueshme dhe të pasur për adoleshentët duke krijuar një ambient të sigurt dhe inkurajues në natyrë, ku ata mund të zhvillojnë aftësitë e tyre sociale, emocionale dhe kreative, të ndërtojnë miqësi të qëndrueshme, dhe të kujtojnë kujtime të shkëlqyera që do t'i frymëzojnë për të ardhmen.</p>
+    <br>
+    <div class="section-tag" style="margin-top:20px">Vizioni Ynë</div>
+    <p class="section-body" style="margin-top:10px">Të jemi udhëheqës në ofrimin e përvojave të natyrshme dhe frymëzuese për adoleshentët, duke i inkurajuar ata të eksplorojnë, të zhvillojnë veten dhe të krijojnë lidhje të fuqishme me natyrën dhe njëri-tjetrin.</p>
+  </div>
+</section>
+
+<!-- SESSIONS -->
+<section class="sessions-section" id="sessions">
+  <div class="section-tag reveal" style="background:rgba(255,255,255,0.1);color:#f0c040;border-color:rgba(240,192,64,0.4)">Kalendari 2024</div>
+  <h2 class="section-title reveal">3 SESIONE VERORE</h2>
+  <p class="section-body reveal">Çdo sesion zgjat 7 ditë. Kapaciteti: 50 persona për sesion. Çmimi: 17,000 Lekë / person / sesion.</p>
+  <div class="sessions-grid">
+    <div class="session-card reveal">
+      <div class="session-num">1</div>
+      <div class="session-label">Sesioni i Parë</div>
+      <div class="session-dates">21 — 28 Qershor</div>
+      <div class="session-price"><strong>17,000</strong> Lekë</div>
+    </div>
+    <div class="session-card reveal">
+      <div class="session-num">2</div>
+      <div class="session-label">Sesioni i Dytë</div>
+      <div class="session-dates">5 — 12 Korrik</div>
+      <div class="session-price"><strong>17,000</strong> Lekë</div>
+    </div>
+    <div class="session-card reveal">
+      <div class="session-num">3</div>
+      <div class="session-label">Sesioni i Tretë</div>
+      <div class="session-dates">19 — 26 Korrik</div>
+      <div class="session-price"><strong>17,000</strong> Lekë</div>
+    </div>
+  </div>
+</section>
+
+<!-- ACTIVITIES -->
+<section class="activities" id="activities">
+  <div class="activities-header">
+    <div class="section-tag reveal">Çfarë Ofrojmë</div>
+    <h2 class="section-title reveal">AKTIVITETET</h2>
+  </div>
+  <div class="act-grid">
+    <div class="act-card reveal">
+      <span class="act-icon">🚣</span>
+      <h3>Kajak & Lundrim</h3>
+      <p>Aventura ujore në ujërat e pastërt të bregdetit jonian.</p>
+    </div>
+    <div class="act-card reveal">
+      <span class="act-icon">🏖️</span>
+      <h3>Bregdeti & Plazh</h3>
+      <p>Plazhet magjike të Jalës dhe Vunoit — peizazh i mrekullueshëm.</p>
+    </div>
+    <div class="act-card reveal">
+      <span class="act-icon">🔥</span>
+      <h3>Zjarri i Kampit</h3>
+      <p>Mbrëmje të ngrohta pranë zjarrit me miq të rinj dhe histori.</p>
+    </div>
+    <div class="act-card reveal">
+      <span class="act-icon">🎬</span>
+      <h3>Kinema Natën</h3>
+      <p>Shfaqje filmash nën qiellin e hapur me ambiente rehati.</p>
+    </div>
+    <div class="act-card reveal">
+      <span class="act-icon">🏐</span>
+      <h3>Sporte Ekipore</h3>
+      <p>Volejboll, futboll plazhi dhe gara sportive mes grupit.</p>
+    </div>
+    <div class="act-card reveal">
+      <span class="act-icon">🌿</span>
+      <h3>Shëtitje Natyrore</h3>
+      <p>Eksplorim i peizazheve mahnitëse të jugut shqiptar.</p>
+    </div>
+  </div>
+</section>
+
+<!-- LOCATION -->
+<section class="location-section" id="location">
+  <div class="location-img reveal">
+    <img src="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=800" alt="Jal Vuno Albania" />
+  </div>
+  <div class="reveal">
+    <div class="section-tag">Ku Ndodhemi</div>
+    <h2 class="section-title">JAL, VUNO<br>JUG SHQIPËRI</h2>
+    <p class="section-body">Kampi ndodhet në zemër të rivierës shqiptare, mes klifikave dramatike dhe ujërave të kaltra kristalore të Jonit. Një vendndodhje e rrallë dhe e mahnitshme për adoleshentët.</p>
+    <div class="price-tag">
+      <span class="amount">17,000</span>
+      <span class="per">Lekë / sesion</span>
+    </div>
+    <ul class="location-features">
+      <li><span>✓</span> Bungalow & Tenda</li>
+      <li><span>✓</span> Restorante & Piceri</li>
+      <li><span>✓</span> Plazh privat</li>
+      <li><span>✓</span> 3 vakte ushqimi në ditë</li>
+      <li><span>✓</span> Infermiere & Staf i trajnuar</li>
+    </ul>
+  </div>
+</section>
+
+<!-- ETHICS -->
+<section class="ethics-section">
+  <div class="section-tag reveal" style="background:rgba(255,255,255,0.1);color:#f0c040;border-color:rgba(240,192,64,0.3)">Rregullorja</div>
+  <h2 class="section-title reveal">PLANI I ETIKËS</h2>
+  <div class="ethics-grid">
+    <div class="ethics-item reveal">
+      <div class="ethics-num">01</div>
+      <p>Respekti ndaj të tjerëve</p>
+    </div>
+    <div class="ethics-item reveal">
+      <div class="ethics-num">02</div>
+      <p>Ndihma dhe bashkëpunimi</p>
+    </div>
+    <div class="ethics-item reveal">
+      <div class="ethics-num">03</div>
+      <p>Pastërtia dhe ruajtja e mjedisit</p>
+    </div>
+    <div class="ethics-item reveal">
+      <div class="ethics-num">04</div>
+      <p>Siguria personale</p>
+    </div>
+    <div class="ethics-item reveal">
+      <div class="ethics-num">05</div>
+      <p>Respekti ndaj pronës</p>
+    </div>
+    <div class="ethics-item reveal">
+      <div class="ethics-num">06</div>
+      <p>Diversiteti dhe inkluziviteti</p>
+    </div>
+  </div>
+</section>
+
+<!-- STAFF -->
+<section class="staff-section">
+  <div class="section-tag reveal">Ekipi Ynë</div>
+  <h2 class="section-title reveal">STAFI I KAMPIT</h2>
+  <div class="staff-grid">
+    <div class="staff-card reveal">
+      <span class="staff-emoji">👨‍🍳</span>
+      <div class="staff-role">Kuzhiniere</div>
+      <div class="staff-count">4 persona</div>
+    </div>
+    <div class="staff-card reveal">
+      <span class="staff-emoji">🏕️</span>
+      <div class="staff-role">Instruktore</div>
+      <div class="staff-count">2 persona</div>
+    </div>
+    <div class="staff-card reveal">
+      <span class="staff-emoji">🤝</span>
+      <div class="staff-role">Ndihmes</div>
+      <div class="staff-count">3 persona</div>
+    </div>
+    <div class="staff-card reveal">
+      <span class="staff-emoji">🏥</span>
+      <div class="staff-role">Infermiere</div>
+      <div class="staff-count">1 person</div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section class="contact-section" id="contact">
+  <div class="section-tag reveal" style="background:rgba(255,255,255,0.1);color:#f0c040;border-color:rgba(240,192,64,0.3)">Na Kontaktoni</div>
+  <h2 class="section-title reveal">KONTAKTI</h2>
+  <div class="contact-grid">
+    <div class="contact-item reveal">
+      <span class="contact-icon">📍</span>
+      <div class="contact-label">Vendndodhja</div>
+      <div class="contact-value">Jal, Vuno<br>Jug Shqipëri</div>
+    </div>
+    <div class="contact-item reveal">
+      <span class="contact-icon">📞</span>
+      <div class="contact-label">Telefon</div>
+      <div class="contact-value">+355 692 7911</div>
+    </div>
+    <div class="contact-item reveal">
+      <span class="contact-icon">📱</span>
+      <div class="contact-label">Social Media</div>
+      <div class="contact-value">@summercampingal</div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  &copy; 2024 <span>Summer Camping Albania</span> — Projekt Shkollor Ekonomi | Griselda Kullafi
+</footer>
+
+<script>
+  // Scroll reveal
+  const reveals = document.querySelectorAll('.reveal');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+      }
+    });
+  }, { threshold: 0.12 });
+
+  reveals.forEach(el => observer.observe(el));
+
+  // Smooth nav highlight
+  const sections = document.querySelectorAll('section[id], div[id]');
+  const navLinks = document.querySelectorAll('nav ul a');
+
+  window.addEventListener('scroll', () => {
+    let current = '';
+    sections.forEach(s => {
+      if (window.scrollY >= s.offsetTop - 100) current = s.id;
+    });
+    navLinks.forEach(a => {
+      a.style.color = a.getAttribute('href') === `#${current}` ? '#f0c040' : '';
+    });
+  });
+</script>
+</body>
+</html>
